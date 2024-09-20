@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-
+import Sidebar from "./components/Sidebar";
+import Navbar from "./components/Navbar";
 import { useStateContext } from "./context";
+import { Home, Profile, Onboarding } from "./pages";
 
 
 const App = ()=>{
