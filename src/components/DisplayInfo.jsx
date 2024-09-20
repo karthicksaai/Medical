@@ -103,7 +103,7 @@ const DisplayInfo = () => {
     {
       title: "Treatment Progress Update",
       subtitle: "View",
-      value: ${metrics.completedScreenings} of ${metrics.totalScreenings},
+      value: `${metrics.completedScreenings} of ${metrics.totalScreenings}`,
       icon: IconCircleDashedCheck,
       onClick: () => navigate("/treatment/progress"),
     },
@@ -184,7 +184,7 @@ const DisplayInfo = () => {
             <PieChart width={300} height={300}>
               <Pie data={pieData} cx="50%" cy="50%" outerRadius={80} fill="#8884d8" dataKey="value">
                 {pieData.map((entry, index) => (
-                  <Cell key={cell-${index}} fill={COLORS[index % COLORS.length]} />
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
               <Tooltip />
