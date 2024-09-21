@@ -27,9 +27,17 @@ const PastRecordsIndex = () => {
   }, [user, fetchUserByEmail,fetchPatientRecords]);
 
   useEffect(() => {
-    console.log(patients);
-    setRecords(patients);
-    localStorage.setItem("patients", JSON.stringify(patients));
+    if (Array.isArray(patients) && patients.length > 0) {
+      console.log("Fetched patients:", patients);
+      // If the expected properties are not available, handle that scenario
+      const updatedRecords = patients.map(patient => ({
+        id: patient.id,
+        name: patient.name || 'Unnamed Patient', // Provide a fallback
+        // other properties...
+      }));
+      setRecords(updatedRecords);
+      localStorage.setItem("patients", JSON.stringify(updatedRecords));
+    }
   }, [patients]);
 
   const handleOpenModal = () => {
@@ -50,7 +58,7 @@ const PastRecordsIndex = () => {
   
         if (newRecord) {
           console.log(newRecord);
-          fetchPatientRecords(user.email.address);
+          setRecords((prevRecords) => [...prevRecords, newRecord]);
           handleCloseModal();
         }
       }
@@ -60,11 +68,31 @@ const PastRecordsIndex = () => {
     }
   };
 
+  // const handleNavigate = (record) => {
+  //   navigate(`/past-records/${record.name}`, {
+  //     state: { recordName: record.name, id: record.id },
+  //   });
+  // };
+
   const handleNavigate = (record) => {
-    navigate(`/past-records/${record.name}`, {
-      state: record, // Pass the full record object directly
-    });
+    if (record && record.name) {
+      navigate(`/past-records/${record.name}`, {
+        state: { recordName: record.name, id: record.id },
+      });
+    } else {
+      console.log("Record data is missing:", record); // This log will help you diagnose further
+    }
   };
+
+  // const handleNavigate = (name) => {
+  //   const filteredRecords = records.filter(
+  //     (record) => record.name === name,
+  //   );
+  //   navigate(`/past-records/${name}`, {
+  //     state: filteredRecords[0], // Pass the filtered record object
+  //   });
+  // };
+  
 
   return (
     <div className="flex flex-wrap gap-[26px]">
