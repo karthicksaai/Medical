@@ -142,6 +142,12 @@ const DisplayInfo = () => {
       icon: IconAlertCircle,
       onClick: () => navigate("/screenings/overdue"),
     },
+    {
+      title: "Risk Prediction",
+      subtitle: "View",
+      icon: IconAlertCircle,
+      onClick: () => navigate("/risk-analysis"),
+    },
   ];
 
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
