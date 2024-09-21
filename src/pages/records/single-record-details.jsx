@@ -6,7 +6,6 @@ import {
 } from "@tabler/icons-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useStateContext } from "../../context/index";
-import ReactMarkdown from "react-markdown";
 import FileUploadModal from "./components/file-upload-modal";
 import RecordDetailsHeader from "./components/record-details-header";
 import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -21,7 +20,10 @@ function SingleRecordDetails() {
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [processing, setIsProcessing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState(
-    state.analysisResult || "",
+    state.analysisResult || ""
+  );
+  const [editableAnalysisResult, setEditableAnalysisResult] = useState(
+    state.analysisResult || ""
   );
   const [filename, setFilename] = useState("");
   const [filetype, setFileType] = useState("");
@@ -74,14 +76,23 @@ function SingleRecordDetails() {
 
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
 
-      const prompt = `You are an expert cancer and any disease diagnosis analyst. Use your knowledge base to answer questions about giving personalized recommended treatments.
-        give a detailed treatment plan for me, make it more readable, clear and easy to understand make it paragraphs to make it more readable
-        `;
+      const prompt = `
+      You are a highly knowledgeable medical assistant. Given the patient's information and medical history, provide a detailed, readable, and easy-to-understand treatment plan for the condition described.
+
+      Please focus on presenting the potential treatments, suggestions, and steps to take, using medical knowledge and assuming this information will be reviewed by a licensed physician.
+
+      Use professional and concise language, avoid disclaimers, and do not reference limitations in medical advice.
+
+      Here is the patient data: [Insert patient data here].
+
+      Generate the treatment plan as paragraphs with bullet points for clarity where necessary.
+      `;
 
       const result = await model.generateContent([prompt, ...imageParts]);
       const response = await result.response;
       const text = response.text();
       setAnalysisResult(text);
+      setEditableAnalysisResult(text); // Set editable content
       const updatedRecord = await updateRecord({
         documentID: state.id,
         analysisResult: text,
@@ -100,6 +111,10 @@ function SingleRecordDetails() {
     }
   };
 
+  const handleUserModification = (e) => {
+    setEditableAnalysisResult(e.target.value); // Update state when user edits
+  };
+
   const processTreatmentPlan = async () => {
     setIsProcessing(true);
 
@@ -107,7 +122,7 @@ function SingleRecordDetails() {
 
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
 
-    const prompt = `Your role and goal is to be an that will be using this treatment plan ${analysisResult} to create Columns:
+    const prompt = `Your role and goal is to be an that will be using this treatment plan ${editableAnalysisResult} to create Columns:
                 - Todo: Tasks that need to be started
                 - Doing: Tasks that are in progress
                 - Done: Tasks that are completed
@@ -185,11 +200,15 @@ function SingleRecordDetails() {
                 <div className="flex w-full flex-col px-6 py-4 text-white">
                   <div>
                     <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
-                      Analysis Result
+                      Analysis Result (Editable)
                     </h2>
-                    <div className="space-y-2 text-black">
-                      <ReactMarkdown>{analysisResult}</ReactMarkdown>
-                    </div>
+                    {/* Editable TextArea */}
+                    <textarea
+                      className="w-full border border-gray-300 p-2 rounded-md text-black"
+                      value={editableAnalysisResult}
+                      onChange={handleUserModification}
+                      rows={10}
+                    />
                   </div>
                   <div className="mt-5 grid gap-2 sm:flex">
                     <button
@@ -197,7 +216,7 @@ function SingleRecordDetails() {
                       onClick={processTreatmentPlan}
                       className="inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white dark:hover:bg-neutral-800"
                     >
-                      View Treatment plan
+                      View Treatment Plan
                       <IconChevronRight size={20} />
                       {processing && (
                         <IconProgress
