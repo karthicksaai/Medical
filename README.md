@@ -1,8 +1,8 @@
 **Features**
 
--Conversational Chatbot on Patient's Details: Doctor can give natural language query related to patient records, and get the necessary details.
--Digitalizing Medical Forms: Medical forms are stored in the database.
--Personalized AI-Driven Personalized Treatment Plan: Medical forms are summarized by AI.
+* Conversational Chatbot on Patient's Details: Doctor can give natural language query related to patient records, and get the necessary details.
+* Digitalizing Medical Forms: Medical forms are stored in the database.
+* Personalized AI-Driven Personalized Treatment Plan: Medical forms are summarized by AI.
 *Kanban-style Task Management: Organizes screenings and tasks by columns (e.g., To-Do, In-Progress, Done).
 *AI-driven Risk Analysis: Uses Gemini AI to analyze medical records and rank them based on risk severity.
 *Task Management: Kanban-style task management for tracking completed screenings and task progress.
