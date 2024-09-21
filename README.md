@@ -5,7 +5,6 @@
 * Personalized AI-Driven Personalized Treatment Plan: Medical forms are summarized by AI.
 * Kanban-style Task Management: Organizes screenings and tasks by columns (e.g., To-Do, In-Progress, Done).
 * AI-driven Risk Analysis: Uses Gemini AI to analyze medical records and rank them based on risk severity.
-* Task Management: Kanban-style task management for tracking completed screenings and task progress.
 * Metrics Dashboard: Provides insights into total screenings and completed tasks.
 * User Authentication: Integrated with Privy.io for user authentication.
 * Responsive UI: Optimized for various screen sizes with an intuitive user interface.
