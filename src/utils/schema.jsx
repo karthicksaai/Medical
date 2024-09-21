@@ -24,22 +24,45 @@ export const Records = pgTable("records", {
   id: serial("id").primaryKey(),
   userId: integer("user_id")
     .references(() => Users.id)
-    .notNull(),
-  recordName: varchar("record_name").notNull(),
-  analysisResult: varchar("analysis_result").notNull(),
-  kanbanRecords: varchar("kanban_records").notNull(),
-  createdBy: varchar("created_by").notNull(),
+    //.notNull()
+    ,
+  name: varchar("name"),
+  patientId: integer("patient_id").references(() => Patients.id),
+  recordName: varchar("record_name")
+  //.notNull()
+  ,
+  analysisResult: varchar("analysis_result")
+  //.notNull()
+  ,
+  kanbanRecords: varchar("kanban_records")
+  //.notNull()
+  ,
+  createdBy: varchar("created_by")
+  //.notNull(),
+  ,
 });
 
 // patients schema
 export const Patients = pgTable("patients", {
   id: serial("id").primaryKey(),
   name: varchar("name").notNull(),
-  age: integer("age").notNull(),
-  gender: varchar("gender").notNull(),
-  location: varchar("location").notNull(),
-  medicalHistory: text("medical_history").notNull(),
-  allergies: text("allergies").array().notNull().default(sql`ARRAY[]::text[]`),
-  treatmentCounts: integer("treatment_counts").notNull(),
-  createdBy: varchar("created_by").notNull(),
+  age: integer("age")
+  //.notNull(),
+  ,
+  gender: varchar("gender")
+  //.notNull(),
+  ,
+  location: varchar("location")
+  //.notNull(),
+  ,
+  medicalHistory: text("medical_history")
+  //.notNull(),
+  ,
+  allergies: text("allergies").array()//.notNull()
+  .default(sql`ARRAY[]::text[]`),
+  treatmentCounts: integer("treatment_counts")
+  //.notNull(),
+  ,
+  createdBy: varchar("created_by")
+  //.notNull(),
 });
