@@ -34,7 +34,7 @@ const OverdueScreenings = () => {
                       overdueScreeningsCount += 1;
 
                       // Create a unique key using a combination of properties
-                      const uniqueKey = ${record.recordName}-${task.id};
+                      const uniqueKey = `${record.recordName}-${task.id}`;
 
                       allOverdueScreenings.push({
                         key: uniqueKey, // Unique key for React
