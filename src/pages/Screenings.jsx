@@ -90,7 +90,7 @@ const Screenings = () => {
           {screenings.map((screening) => (
             <li
               key={screening.id}
-              className="mb-4 p-4 border rounded cursor-pointer hover:bg-gray-100"
+              className="mb-4 p-4 border rounded cursor-pointer bg-blue-100 hover:bg-gray-100"
               onClick={() => handleTaskClick(screening.id)}
             >
               <h2 className="text-lg font-medium">{screening.title}</h2>
