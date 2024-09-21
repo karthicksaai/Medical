@@ -73,7 +73,7 @@ const TreatmentProgress = () => {
         {progressData.treatmentDetails.length > 0 ? (
           <ul>
             {progressData.treatmentDetails.map((treatment) => (
-              <li key={treatment.name} className="mb-4 p-4 border rounded">
+              <li key={treatment.name} className="mb-4 p-4 border rounded cursor-pointer bg-blue-100 hover:bg-gray-100">
                 <h3 className="text-md font-semibold">{treatment.name}</h3>
                 <p><strong>Status:</strong> {treatment.status}</p>
                 <p><strong>Details:</strong> {treatment.details}</p>
