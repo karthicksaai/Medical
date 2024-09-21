@@ -19,17 +19,17 @@ Google Gemini AI: For analyzing medical records, generating risk assessments, an
 Tailwind CSS: Utility-first CSS framework for styling.
 Privy.io: Authentication and identity management.
 
-Dashboard
+**Dashboard**
 ![image](https://github.com/user-attachments/assets/96b65a15-a1fa-4a0a-8530-d23448d6ff16)
 
-Personalized AI-Driven Personalized Treatment Plan
+**Personalized AI-Driven Personalized Treatment Plan**
 ![image](https://github.com/user-attachments/assets/5aa3836c-155c-47d2-8b64-a4e6a4af2560)
 
-AI Generated Kanban Task Management
+**AI Generated Kanban Task Management**
 ![image](https://github.com/user-attachments/assets/de29422b-35bf-4fbf-b187-90d11dea59d2)
 
-Patient's Past Record Summary
+**Patient's Past Record Summary**
 ![image](https://github.com/user-attachments/assets/e27cd685-e3cb-4492-89d9-7c3bcc489253)
 
-Chatbot
+**Chatbot**
 ![image](https://github.com/user-attachments/assets/62fe95fa-852f-449b-8a97-9997b7ee1703)
