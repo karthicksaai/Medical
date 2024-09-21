@@ -16,6 +16,7 @@ import PendingScreenings from "./pages/PendingScreenings";
 import OverdueScreenings from "./pages/OverdueScreenings";
 import PastRecordsIndex from "./pages/records/pastindex";
 import PastRecordDetails from "./pages/records/past-record-details";
+import DatabaseChatbot from "./components/DatabaseChatbot";
 
 const App = ()=>{
     const { user, authenticated, ready, login, currentUser } = useStateContext();
@@ -54,6 +55,7 @@ const App = ()=>{
                     <Route path="/screenings/pending" element={<PendingScreenings />}/>
                     <Route path="/screenings/overdue" element={<OverdueScreenings />}/>
                 </Routes>
+                <DatabaseChatbot />
             </div>
         </div>
     )
