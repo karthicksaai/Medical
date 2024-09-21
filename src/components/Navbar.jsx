@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { usePrivy } from "@privy-io/react-auth";
-import { useStateContext } from "../context";
+import { useStateContext } from "../context"; // Adjust the import path
 
 import { menu, search } from "../assets";
 import { navlinks } from "../constants";
@@ -51,7 +51,7 @@ const Navbar = () => {
 
   return (
     <div className="mb-[35px] flex flex-col-reverse justify-between gap-6 md:flex-row">
-      <div className="flex h-[52px] max-w-[458px] flex-row rounded-[100px] bg-[#4b7ad3] py-2 pl-4 pr-2 lg:flex-1">
+      <div className="flex h-[52px] max-w-[458px] flex-row rounded-[100px] bg-[#E2F1E6] py-2 pl-4 pr-2 lg:flex-1">
         <input
           type="text"
           placeholder="Search for records"
