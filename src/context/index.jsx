@@ -10,6 +10,7 @@ const StateContext = createContext();
 export const StateContextProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [records, setRecords] = useState([]);
+  const [analysis, setAnalysis] = useState([]);
   const [patients, setPatients] = useState([]); // New state for patients
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -66,6 +67,32 @@ export const StateContextProvider = ({ children }) => {
       setRecords(result);
     } catch (error) {
       console.error("Error fetching user records:", error);
+    }
+  }, []);
+
+  const fetchAllAnalysisResults = useCallback(async () => {
+    try {
+      const result = await db
+        .select({
+          // id: Records.id,
+          recordName: Records.recordName,
+          analysisResult: Records.analysisResult,
+          // createdBy: Records.createdBy
+        })
+        .from(Records)
+        // .where(
+        //   and(
+        //     notEmpty(Records.analysisResult),
+        //     ne(Records.analysisResult, '')
+        //   )
+        // )
+        .execute();
+      setAnalysis(result);
+      console.log("Fetched analysis results:", result);
+      return result;
+    } catch (error) {
+      console.error("Error fetching analysis results:", error);
+      return [];
     }
   }, []);
 
@@ -127,6 +154,26 @@ export const StateContextProvider = ({ children }) => {
     }
   }, []);
 
+  const updatePatient = useCallback(async (patientId, medicalHistory, allergies, treatmentCounts, createdBy) => {
+    try {
+      // Assuming you have access to a database object (db) and Patients schema
+      const updatedRecord = await db
+        .update(Patients)
+        .set({
+          medicalHistory,
+          allergies,
+          treatmentCounts,
+          createdBy
+        })
+        .where(eq(Patients.id, patientId))
+        .returning(); // Fetch updated data
+  
+      return updatedRecord;
+    } catch (error) {
+      console.error("Error updating patient record:", error);
+    }
+  },[]);
+
   // Function to fetch a patient's records (including analysis results)
   const fetchPatientRecords = useCallback(async (email) => {
     try {
@@ -153,7 +200,9 @@ export const StateContextProvider = ({ children }) => {
         users,
         records,
         patients,  // Add patients to the context
+        analysis,
         fetchUsers,
+        fetchAllAnalysisResults,
         fetchUserByEmail,
         createUser,
         fetchUserRecords,
@@ -162,6 +211,7 @@ export const StateContextProvider = ({ children }) => {
         updateRecord,
         fetchPatients,    // Add fetchPatients to the context
         createPatient,    // Add createPatient to the context
+        updatePatient,
         fetchPatientRecords // Add fetchPatientRecords to the context
       }}
     >
