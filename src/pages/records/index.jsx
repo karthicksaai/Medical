@@ -3,19 +3,13 @@ import { IconCirclePlus } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
 import { usePrivy } from "@privy-io/react-auth";
 import { useStateContext } from "../../context/index";
-import CreateRecordModal from "./components/create-record-modal"; // Adjust the import path
-import RecordCard from "./components/record-card"; // Adjust the import path
+import CreateRecordModal from "./components/create-record-modal";
+import RecordCard from "./components/record-card";
 
 const Index = () => {
   const navigate = useNavigate();
   const { user } = usePrivy();
-  const {
-    records,
-    fetchUserRecords,
-    createRecord,
-    fetchUserByEmail,
-    currentUser,
-  } = useStateContext();
+  const { records, fetchUserRecords, createRecord, fetchUserByEmail, currentUser } = useStateContext();
   const [userRecords, setUserRecords] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -31,13 +25,8 @@ const Index = () => {
     localStorage.setItem("userRecords", JSON.stringify(records));
   }, [records]);
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
+  const handleOpenModal = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
 
   const createFolder = async (foldername) => {
     try {
@@ -49,7 +38,6 @@ const Index = () => {
           kanbanRecords: "",
           createdBy: user.email.address,
         });
-
         if (newRecord) {
           fetchUserRecords(user.email.address);
           handleCloseModal();
@@ -61,20 +49,17 @@ const Index = () => {
     }
   };
 
-  const handleNavigate = (name) => {
-    const filteredRecords = userRecords.filter(
-      (record) => record.recordName === name,
-    );
-    navigate(`/medical-records/${name}`, {
-      state: filteredRecords[0],
-    });
+  const handleNavigate = (record) => {
+    if (record) {
+      navigate(`/medical-records/${record.recordName}`, { state: record });
+    }
   };
 
   return (
     <div className="flex flex-wrap gap-[26px]">
       <button
         type="button"
-        className="mt-6 inline-flex items-center gap-x-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-[#13131a] dark:text-white dark:hover:bg-neutral-800"
+        className="mt-6 inline-flex items-center gap-x-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 dark:border-neutral-700 dark:bg-[#13131a] dark:text-white dark:hover:bg-neutral-800"
         onClick={handleOpenModal}
       >
         <IconCirclePlus />
@@ -93,7 +78,7 @@ const Index = () => {
           <RecordCard
             key={record.recordName}
             record={record}
-            onNavigate={handleNavigate}
+            onNavigate={() => handleNavigate(record)}
             isPatientRecord={false}
           />
         ))}
