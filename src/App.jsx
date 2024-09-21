@@ -2,9 +2,20 @@ import React, { useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
-import { useStateContext } from "./context";
 import { Home, Profile, Onboarding } from "./pages";
-
+import { useStateContext } from "./context";
+import MedicalRecord from "./pages/records/index";
+import SingleRecordDetails from "./pages/records/single-record-details";
+import ScreeningSchedule from "./pages/ScreeningSchedule";
+import PendingAppointments from "./pages/PendingAppointments";
+import AppointmentDetail from "./pages/AppointmentDetail";
+import TreatmentProgress from "./pages/TreatmentProgress";
+import Screenings from "./pages/Screenings";
+import CompletedScreenings from "./pages/CompletedScreenings";
+import PendingScreenings from "./pages/PendingScreenings";
+import OverdueScreenings from "./pages/OverdueScreenings";
+import PastRecordsIndex from "./pages/records/pastindex";
+import PastRecordDetails from "./pages/records/past-record-details";
 
 const App = ()=>{
     const { user, authenticated, ready, login, currentUser } = useStateContext();
@@ -29,6 +40,19 @@ const App = ()=>{
                     <Route path="/" element={<Home />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/onboarding" element={<Onboarding />} />
+                    <Route path="/medical-records" element={<MedicalRecord />} />
+                    <Route path="/past-records" element={<PastRecordsIndex />} />
+                    <Route path="/medical-records/:id" element={<SingleRecordDetails />} />
+                    <Route path="/past-records/:id" element={<PastRecordDetails />} />
+                    <Route path="/screening-schedules" element={<ScreeningSchedule />} />
+                    <Route path="/appointments/pending" element={<PendingAppointments />} />
+                    <Route path="/appointments/:id" element={<AppointmentDetail />}/>
+                    <Route path="/treatment/progress"element={<TreatmentProgress />}/>
+                    <Route path="/folders" element={<MedicalRecord />}/>
+                    <Route path="/screenings" element={<Screenings />}/>
+                    <Route path="/screenings/completed" element={<CompletedScreenings />}/>
+                    <Route path="/screenings/pending" element={<PendingScreenings />}/>
+                    <Route path="/screenings/overdue" element={<OverdueScreenings />}/>
                 </Routes>
             </div>
         </div>
