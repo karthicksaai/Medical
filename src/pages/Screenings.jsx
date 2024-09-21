@@ -72,7 +72,7 @@ const Screenings = () => {
   }, [user, fetchUserRecords, records]);
 
   const handleTaskClick = (taskId) => {
-    navigate(/screenings/${taskId});
+    navigate(`/screenings/${taskId}`);
   };
 
   return (
