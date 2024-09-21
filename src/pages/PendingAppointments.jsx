@@ -47,7 +47,7 @@ const PendingAppointments = () => {
           {appointments.map((appointment) => (
             <li
               key={appointment.id}
-              className="mb-4 p-4 border rounded cursor-pointer hover:bg-gray-100"
+              className="mb-4 p-4 border rounded cursor-pointer bg-blue-100 hover:bg-gray-100"
               onClick={() => handleClick(appointment.id)}
             >
               <h2 className="text-lg font-medium">{appointment.recordName}</h2>
