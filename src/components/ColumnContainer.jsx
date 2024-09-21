@@ -45,7 +45,7 @@ function ColumnContainer({
       <div
         ref={setNodeRef}
         style={style}
-        className="flex h-[500px] max-h-[500px] w-[350px] flex-col rounded-md border-2 border-pink-500 bg-[#1c1c24] opacity-40"
+        className="flex h-[500px] max-h-[500px] w-[350px] flex-col rounded-md border-2 border-pink-500 bg-[#7FB3D5] opacity-40"
       ></div>
     );
   }
@@ -54,7 +54,7 @@ function ColumnContainer({
     <div
       ref={setNodeRef}
       style={style}
-      className="flex h-[500px] max-h-[500px] w-[350px] flex-col rounded-xl bg-[#1c1c24]"
+      className="flex h-[500px] max-h-[500px] w-[350px] flex-col rounded-xl bg-[#7FB3D5]"
     >
       <div
         {...attributes}
@@ -62,13 +62,13 @@ function ColumnContainer({
         onClick={() => {
           setEditMode(true);
         }}
-        className="text-md m-2 flex h-[60px] cursor-grab items-center justify-between rounded-xl bg-[#13131a] p-3 font-bold"
+        className="text-md m-2 flex h-[60px] cursor-grab items-center justify-between rounded-xl bg-[#4A90E2] p-3 font-bold"
       >
         <div className="flex gap-2">
           {!editMode && column.title}
           {editMode && (
             <input
-              className="rounded border bg-black px-2 outline-none focus:border-green-500"
+              className="rounded border bg-[#4A90E2] px-2 outline-none focus:to-blue-950"
               value={column.title}
               onChange={(e) => updateColumn(column.id, e.target.value)}
               autoFocus
@@ -86,7 +86,7 @@ function ColumnContainer({
           onClick={() => {
             deleteColumn(column.id);
           }}
-          className="rounded stroke-gray-500 px-1 py-2 hover:bg-columnBackgroundColor hover:stroke-white"
+          className="rounded stroke-gray-500 px-1 py-2 hover:bg-[#4A90E2] hover:stroke-white"
         >
           <IconTrash />
         </button>
@@ -106,7 +106,7 @@ function ColumnContainer({
       </div>
 
       <button
-        className="flex items-center gap-2 rounded-md border-2 border-columnBackgroundColor border-x-columnBackgroundColor p-4 hover:bg-mainBackgroundColor hover:text-green-500 active:bg-black"
+        className="flex items-center gap-2 rounded-md border-2 p-4 hover:bg-[#4A90E2] active:bg-black"
         onClick={() => {
           createTask(column.id);
         }}
