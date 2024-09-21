@@ -17,6 +17,7 @@ import OverdueScreenings from "./pages/OverdueScreenings";
 import PastRecordsIndex from "./pages/records/pastindex";
 import PastRecordDetails from "./pages/records/past-record-details";
 import DatabaseChatbot from "./components/DatabaseChatbot";
+import RiskAnalysisComponent from "./pages/RiskAnalysis";
 
 const App = ()=>{
     const { user, authenticated, ready, login, currentUser } = useStateContext();
@@ -30,7 +31,7 @@ const App = ()=>{
         }
     }, [user, authenticated, ready, login, currentUser, navigate]);
     return (
-        <div className="sm:-8 relative flex min-h-screen flex-row bg-[#8787e4] p-4">
+        <div className="sm:-8 relative flex min-h-screen flex-row bg-[#B2E0D9] p-4">
              <div className="relative mr-10 hidden sm:flex">
                 <Sidebar />
             </div>
@@ -54,6 +55,7 @@ const App = ()=>{
                     <Route path="/screenings/completed" element={<CompletedScreenings />}/>
                     <Route path="/screenings/pending" element={<PendingScreenings />}/>
                     <Route path="/screenings/overdue" element={<OverdueScreenings />}/>
+                    <Route path="/risk-analysis" element={<RiskAnalysisComponent />} />
                 </Routes>
                 <DatabaseChatbot />
             </div>
