@@ -33,12 +33,12 @@ const Sidebar = () => {
   return (
     <div className="sticky top-5 flex h-[93vh] flex-col items-center justify-between">
       <Link to="/">
-        <div className="rounded-[10px] bg-[#4b7ad3] p-2">
+        <div className="rounded-[10px] bg-[#007A7C] p-2">
           <IconReportMedical stroke={2} size={40} color="#ffffff" className=" " />
         </div>
       </Link>
 
-      <div className="mt-12 flex w-[76px] flex-1 flex-col items-center justify-between rounded-[20px] bg-[#14558acc] py-4">
+      <div className="mt-12 flex w-[76px] flex-1 flex-col items-center justify-between rounded-[20px] bg-[#005B73] py-4">
         <div className="flex flex-col items-center justify-center gap-3">
           {navlinks.map((link) => (
             <Icon
