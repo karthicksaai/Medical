@@ -34,7 +34,7 @@ const PendingScreenings = () => {
                       pendingScreeningsCount += 1;
 
                       // Create a unique key using a combination of properties
-                      const uniqueKey = ${record.recordName}-${task.id};
+                      const uniqueKey = `${record.recordName}-${task.id}`;
 
                       allPendingScreenings.push({
                         key: uniqueKey, // Unique key for React
