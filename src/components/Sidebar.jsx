@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import { sun } from "../assets";
 import { navlinks } from "../constants";
 import { IconReportMedical } from "@tabler/icons-react";
 
 const Icon = ({ styles, name, imgUrl, isActive, disabled, handleClick }) => (
   <div
-    className={`h-[48px] w-[48px] rounded-[10px] ${
+    className={`relative h-[48px] w-[48px] rounded-[10px] ${
       isActive && isActive === name && "bg-[#43ad96]"
     } flex items-center justify-center ${
       !disabled && "cursor-pointer"
@@ -23,6 +22,11 @@ const Icon = ({ styles, name, imgUrl, isActive, disabled, handleClick }) => (
         className={`h-6 w-6 ${isActive !== name && "grayscale"}`}
       />
     )}
+
+    {/* Tooltip for navlink name on hover */}
+    <span className="absolute left-[60px] z-10 hidden min-w-max rounded-[10px] bg-gray-800 px-2 py-1 text-sm text-white group-hover:flex">
+      {name}
+    </span>
   </div>
 );
 
@@ -41,17 +45,18 @@ const Sidebar = () => {
       <div className="mt-12 flex w-[76px] flex-1 flex-col items-center justify-between rounded-[20px] bg-[#005B73] py-4">
         <div className="flex flex-col items-center justify-center gap-3">
           {navlinks.map((link) => (
-            <Icon
-              key={link.name}
-              {...link}
-              isActive={isActive}
-              handleClick={() => {
-                if (!link.disabled) {
-                  setIsActive(link.name);
-                  navigate(link.link);
-                }
-              }}
-            />
+            <div className="group relative" key={link.name}>
+              <Icon
+                {...link}
+                isActive={isActive}
+                handleClick={() => {
+                  if (!link.disabled) {
+                    setIsActive(link.name);
+                    navigate(link.link);
+                  }
+                }}
+              />
+            </div>
           ))}
         </div>
 
